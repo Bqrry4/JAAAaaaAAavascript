@@ -8,20 +8,16 @@
 */
 
 /* ============================================================
-   Dynamic base-path resolution (EMBED SAFE)
+   HARD‑CODED CDN ASSET BASE (SHORT‑URL SAFE)
    ============================================================ */
-(function () {
-	var scripts = document.getElementsByTagName("script");
-	var thisScript = scripts[scripts.length - 1].src;
-	window.JAAAaaaAAa_basePath =
-		thisScript.substring(0, thisScript.lastIndexOf("/") + 1);
-})();
+
+var str_path =
+  "https://cdn.jsdelivr.net/gh/Bqrry4/JAAAaaaAAavascript/JAAAaaaAAavascript/";
 
 /* ============================================================
    AAAaaaAAarays
    ============================================================ */
 
-// the sound references
 var arr_screAAAaaaAAams = [
 	"AUD_AAAH_01","AUD_AAAH_03","AUD_AAAH_16","AUD_AAAH_04","AUD_AAAH_05",
 	"AUD_AAAH_20","AUD_AAAH_06","AUD_AAAH_19","AUD_AAAH_11","AUD_AAAH_26",
@@ -36,7 +32,6 @@ var arr_screAAAaaaAAams = [
 	"AUD_AAAH_14","AUD_AAAH_51","AUD_AAAH_50","AUD_AAAH_52","AUD_AAAH_55"
 ];
 
-// what is being screamed about
 var arr_diAAAaaaAAalogue = [
 	"This website is having a meltdown.",
 	"This website is freaking out.",
@@ -58,27 +53,21 @@ var arr_diAAAaaaAAalogue = [
 	"This website is having a crisis.",
 	"This website is having a crisis. Give it some space.",
 	"This website is losing it. It needs space.",
-	"This website needs it's own space right now. Please take a break.",
 	"This website needs some time off.",
 	"This website can't do this anymore.",
 	"This website is losing all hope.",
 	"This website just lost all hope.",
-	"This website is freaking out pretty hard.",
-	"This website is freaking out pretty bad.",
 	"Why are you doing this?",
 	"You did this.",
 	"Why would you do something like this?",
 	"This website has had enough.",
-	"This website is having an existential crisis.",
-	"You expect too much from this website.",
-	"You pushed this website too hard."
+	"This website is having an existential crisis."
 ];
 
 /* ============================================================
    vAAAaaaAAars
    ============================================================ */
 
-var str_path = window.JAAAaaaAAa_basePath;
 var int_intervAAAaaaAAal;
 var snd_screAAAaaaAAam;
 var AAAaaaAAa_window;
@@ -86,11 +75,11 @@ var txt_AAAaaaAAa;
 var num_countdOOOoooOOown = 0;
 
 /* ============================================================
-   Utility functions
+   Utility
    ============================================================ */
 
-function mAAAaaaAAath_range(num_min, num_max){
-	return Math.ceil(num_min + (num_max - num_min) * Math.random());
+function mAAAaaaAAath_range(min, max){
+	return Math.ceil(min + (max - min) * Math.random());
 }
 
 function AAAaaaAAa_returnDocWidth(){
@@ -105,23 +94,23 @@ function AAAaaaAAa_returnDocHeight(){
 		document.body.clientHeight;
 }
 
-function AAAaaaAAa_hideThis(str_elem){
-	document.getElementById(str_elem).style.visibility = "hidden";
+function AAAaaaAAa_hideThis(id){
+	document.getElementById(id).style.visibility = "hidden";
 }
 
-function AAAaaaAAa_showThis(str_elem){
-	document.getElementById(str_elem).style.visibility = "visible";
+function AAAaaaAAa_showThis(id){
+	document.getElementById(id).style.visibility = "visible";
 }
 
 function plAAAaaaAAace_AAAaaaAAa(){
 	AAAaaaAAa_window.style.top =
-		String(AAAaaaAAa_returnDocHeight() - 216) + "px";
+		(AAAaaaAAa_returnDocHeight() - 216) + "px";
 	AAAaaaAAa_window.style.left =
-		String(AAAaaaAAa_returnDocWidth() - 320) + "px";
+		(AAAaaaAAa_returnDocWidth() - 320) + "px";
 }
 
 /* ============================================================
-   Core scream logic
+   Core logic
    ============================================================ */
 
 function AAAaaaAAa(){
@@ -143,9 +132,7 @@ function AAAaaaAAa(){
 	snd_screAAAaaaAAam.play();
 	num_countdOOOoooOOown = 200;
 
-	snd_screAAAaaaAAam.onended = function(){
-		AAAaaaAAa_complete();
-	};
+	snd_screAAAaaaAAam.onended = AAAaaaAAa_complete;
 }
 
 function AAAaaaAAa_complete(){
@@ -167,7 +154,7 @@ function intervAAAaaaAAal(){
 		try { snd_screAAAaaaAAam.pause(); } catch(e){}
 	}
 
-	num_countdOOOoooOOown -= 1;
+	num_countdOOOoooOOown--;
 }
 
 /* ============================================================
@@ -182,11 +169,11 @@ function stAAAaaaAAart(){
 	AAAaaaAAa_window.style.position = "fixed";
 	AAAaaaAAa_window.style.visibility = "hidden";
 
-	var bAAAaaaAAackground = document.createElement("div");
-	bAAAaaaAAackground.innerHTML =
+	var bg = document.createElement("div");
+	bg.innerHTML =
 		'<img src="' + str_path + 'images/IMG_POPUP.gif">';
-	bAAAaaaAAackground.style.position = "absolute";
-	AAAaaaAAa_window.appendChild(bAAAaaaAAackground);
+	bg.style.position = "absolute";
+	AAAaaaAAa_window.appendChild(bg);
 
 	txt_AAAaaaAAa = document.createElement("div");
 	txt_AAAaaaAAa.style.position = "absolute";
@@ -206,4 +193,5 @@ function stAAAaaaAAart(){
 	int_intervAAAaaaAAal = setInterval(intervAAAaaaAAal, 50);
 }
 
-stAAAaaaAAart();
+/* auto‑start (allows 1‑tag embed + short URL) */
+setTimeout(stAAAaaaAAart, 3000);
